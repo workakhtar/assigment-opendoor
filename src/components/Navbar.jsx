@@ -1,11 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./../styles/components/navbar.css";
 import { NAVIGATION_MENU } from "../utils/constant";
+// import { fetchListings } from "../Reduxtoolkit/slice/listing";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = React.useState(false);
   const [showSearch, setShowSearch] = React.useState(false);
-  React.useEffect(() => {
+  const { listings, loading, error } = useSelector((state) => state.listings);
+
+
+//   const dispatch = useDispatch();
+
+
+  useEffect(() => {
     const handlePopState = () => {
       setShowSearch(false);
     };
@@ -55,13 +64,13 @@ const Navbar = () => {
                 </div>
                 <div className="d-flex w-100 justify-content-center">
                   <div className="icon-hover d-md-block d-none" >
-                    <div className="d-flex align-items-center gap-2">
+                    <div className="d-flex align-items-center gap-2" onClick={handleSearchOpen}>
                       <svg
                         width="15"
                         height="15"
                         viewBox="0 0 15 15"
                         xmlns="http://www.w3.org/2000/svg"
-                        onClick={handleSearchOpen}
+                        
                         style={{ cursor: 'pointer' }}
                       >
                         <circle

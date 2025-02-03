@@ -1,38 +1,32 @@
 import React, { useState, useEffect } from "react";
 import "./../styles/components/listings.css";
-import { PropertListing } from "../api/authApis";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchListings } from "../Reduxtoolkit/slice/listing";
+
 
 const ITEMS_PER_PAGE = 10;
 
 const Listing = () => {
-  const [listing, setListing] = useState([]);
-  const [loading, setLoading] = useState(true);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [showNewestDropdown, setShowNewestDropdown] = useState(false);
-  const [showFiltersDropdown, setShowFiltersDropdown] = useState(false);
 
-  const GetListing = async () => {
-    setLoading(true);
-    try {
-      const response = await PropertListing.getListing();
-      if (response.data.success) {
-        setListing(response.data.deals);
-        setTotalPages(Math.ceil(response.data.deals.length / ITEMS_PER_PAGE));
-      }
-    } catch (error) {
-      console.log("Failed to get the Property lists", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const dispatch = useDispatch();
+  const { listings, loading, error } = useSelector((state) => state.listings);
 
   useEffect(() => {
-    GetListing();
-  }, []);
+    if (listings) {
+      setTotalPages(Math.ceil(listings.length / ITEMS_PER_PAGE));
+    }
+  }, [listings]);
+
+  useEffect(() => {
+    dispatch(fetchListings());
+  }, [dispatch]);
 
   // Paginate the listings
-  const paginatedListings = listing.slice(
+  const paginatedListings = listings.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -50,7 +44,7 @@ const Listing = () => {
           <div className="filters-title">
             <h1 className="text-1">Homes for sale in Tampa</h1>
             <div className="text-875 count">
-              {listing.length} listings found — Listed on the MLS.
+              {listings.length} listings found — Listed on the MLS.
             </div>
           </div>
           <div className="filter-container d-flex ">
@@ -62,11 +56,11 @@ const Listing = () => {
             
                 {showNewestDropdown && (
                     <div className="dropdown-menu-newest">
-                      <div className="dropdown-item">Newest</div>
-                      <div className="dropdown-item">Lowest Price</div>
-                      <div className="dropdown-item">Highest Price</div>
-                      <div className="dropdown-item">Smallest</div>
-                      <div className="dropdown-item">Largeest </div>
+                      <div className="dropdown-item-newest">Newest</div>
+                      <div className="dropdown-item-newest">Lowest Price</div>
+                      <div className="dropdown-item-newest">Highest Price</div>
+                      <div className="dropdown-item-newest">Smallest</div>
+                      <div className="dropdown-item-newest">Largeest </div>
                     </div>
                   )}
           
