@@ -71,7 +71,7 @@
     position: relative;
     min-width: 280px;
     width: 200px;
-    height: 180px;
+    /* height: 180px; */
   }
 
   .image-container img {
