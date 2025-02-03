@@ -64,7 +64,7 @@ const Listing = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <>
       <div className="right-pane">
         <div className="filters-space">
           <div className="filters-title">
@@ -92,8 +92,11 @@ const Listing = () => {
             <div >
                <PropertyCard property={property} key={index} />
               {index ===1 && (
-                <div className="property-card p-10">
-                    <h1 className="text-1">Make your strongest offer when you buy with Opendoor</h1>
+                <div className="property-card p-10 text-center">
+                    <h1 className="text-1">Make your strongest offer when you buy with <a  
+                    href="https://www.opendoor.com/"
+                    target="_blank"
+                    rel="noopener noreferrer" className="pointer text-decoration-none text-1c85e8">Opendoor</a> </h1>
                 </div>
               )}
               </div>
@@ -102,7 +105,7 @@ const Listing = () => {
         </div>
 
         {/* Pagination Controls */}
-        {totalPages > 1 && (
+        {(!loading && totalPages > 1) && (
           <div className="pagination-control">
             <button
               className="prev"
@@ -138,7 +141,7 @@ const Listing = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

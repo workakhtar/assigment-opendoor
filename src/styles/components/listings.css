@@ -229,4 +229,8 @@
         height: 350px;
         aspect-ratio: 546 / 350;
       }
+
+    .right-pane{
+        width: 100%;
+    }
 }

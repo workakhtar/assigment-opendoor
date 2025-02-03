@@ -3,7 +3,9 @@ import './../styles/components/map.css'
 
 const Map = () => {
   return (
-    <div className='left-pane'>Map</div>
+    <div className='d-md-block d-none left-pane'>
+        <img className='w-100' src="/GoogleMapTA.webp" alt="" />
+    </div>
   )
 }
 
