@@ -1,0 +1,168 @@
+.header-shadow {
+    box-shadow: 0 1px 4px rgba(68, 89, 109, .15);
+}
+
+
+.h-78{
+    height: 78px;
+}
+
+.navbar-space{
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 22px;
+
+}
+
+.sign-in-hover:hover
+{
+    color:#239ded
+}
+
+.icon-hover {
+   
+    color: #6e6e6e; /* Default text color */
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .icon-hover:hover {
+    color: #1c85e8; 
+  }
+  
+  .icon-hover:hover path {
+    fill: #1c85e8; /* Change color of the path on hover */
+  }
+  
+  .icon-hover:hover circle {
+    stroke: #1c85e8; /* Change stroke color of the circle on hover */
+  }
+  .hover-bg-light:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+  }
+
+
+
+.right-10 {
+  right: 10px;
+}
+
+.ml-22 {
+  margin-left: 22px;
+}
+.ml-5 {
+  margin-left: 5px;
+}
+.margin-b-4 {
+  margin-bottom: 4px;
+}
+
+.submenu {
+  border-radius: 3px;
+  background: #fff;
+  z-index: 1000;
+  box-shadow: -5px 0 40px rgba(0, 0, 0, .1);
+  transition: all .3s ease;
+}
+
+.submenu::before {
+  content: "";
+  position: absolute;
+  top: -75px;
+  left: 0;
+  width: 150px;
+  height: 75px;
+  background: transparent;
+}
+
+.submenu-arrow {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 14px;
+  height: 12px;
+  background-color: white;
+  box-shadow: -2px -2px 3px rgba(0,0,0,0.05);
+}
+
+.submenu-link {
+  display: block;
+  font-size: 15px;
+  color: #6e6e6e;
+  margin-bottom: 17px;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.submenu-link:hover {
+  color: #1c85e8;
+  text-decoration: none;
+}
+
+.search-input::placeholder {
+  color: #6e6e6e;
+  opacity: 0.7;
+}
+
+.search-input:focus {
+  border-bottom-color: #1c85e8;
+}
+
+.search-input-container {
+  position: relative;
+}
+
+.search-group-container {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.search-input.animate-search {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 0.3s ease forwards;
+}
+
+.search-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #222222;
+  animation: drawLine 0.3s ease-out 0.2s forwards;
+}
+.search-close {
+  position: fixed;
+  top: 78px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 999;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawLine {
+  to {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 768px) {
+    .mobile-text-navbar {
+        font-size: .875rem;
+    }
+}

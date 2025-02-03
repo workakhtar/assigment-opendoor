@@ -1,0 +1,238 @@
+.right-pane{
+    /* position: relative;
+    left: calc(100vw - 680px); */
+    min-width: 680px;
+    width: 680px;
+    height: 90vh;
+    overflow-y: auto;
+}
+
+
+.filters-space{
+    padding: 22px 32px;
+     padding-right: 0;
+}
+
+.filters-title h1{
+    line-height: 1.15;
+    margin: 0 0 4px;
+}
+
+.filters-title .count {
+    line-height: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 2rem;
+    font-family:Graphik, sans-serif;
+    font-weight: 400;
+}
+
+.filter-newest{
+    margin-right: 8px;
+}
+
+.filter-newest, .more-filters{
+    font-size: 12px;
+    line-height: 100%;
+    padding: 4.5px 8px 4.5px 8px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #222;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #222;
+    
+}
+
+.filter-newest:hover, .more-filters:hover{
+    background-color: #f2f2f2;
+}
+
+.filter-newest .newest, .more-filters .more{
+    font-weight: 600;
+}
+
+.filter-newest img, .more-filters img {
+    margin-left: 5.67px;
+}
+
+
+/* Property card */
+.property-card {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 600px;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: rgba(29, 71, 123, 0.04) 0px 5px 10px, rgba(29, 71, 123, 0.12) 0px 1px 5px;
+    box-sizing: border-box;
+    display: flex;
+    margin: 20px;
+  }
+
+  .image-container {
+    position: relative;
+    min-width: 280px;
+    width: 200px;
+    height: 180px;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .content {
+    padding: 20px 22px 15px 32px;
+    display: flex ;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+    
+  }
+
+  .price {
+    font-size: 19px;
+        line-height: 28px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+
+  .details {
+    font-size: 14px;
+    line-height: 24px;
+    color: #6e6e6e;
+    margin: 0 0 4px 0;
+  }
+
+  .address {
+    font-size: 14px;
+    line-height: 24px;
+    color: #6e6e6e;
+    margin: 0;
+  }
+
+  .location {
+    color: #6e6e6e;
+    font-size: 14px;
+    margin: 4px 0 0 0;
+  }
+
+  .opendoor-badge {
+    font-weight: 600;
+    min-height: 26px;
+    font-size: 12px;
+    padding: 8px;
+
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: white;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    
+  }
+  .opendoor-badge img {
+    margin-right: 6px
+  }
+
+  .favorite-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .pagination-control {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .pagination-control .prev, .pagination-control .next{
+    border: none;
+    font-weight: 600;
+    color: #1c85e8;
+  }
+
+  .pagination-control .pag-number{
+    margin: 0 27px 2px;
+  }
+
+ .pag-number .pag-single-number{
+    margin: 0 5px;
+    padding: 0 4px 4px;
+    border: none;
+  }
+  
+  .pagination-control button {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .pag-number .active {
+    color: #222;
+    font-weight: 700;
+    border-bottom: 3px solid #1c85e8;
+  }
+  
+  .pagination-control button:disabled {
+    opacity: 0.5;
+    color: #222;
+    cursor: not-allowed;
+  }
+
+
+  /* Dropdown */
+  .dropdown-menu-newest{
+    font-size: 12px;
+    line-height: 100%;
+    transition: all .3s;
+    background-color: #fff;
+    margin-top: 8px;
+    position: absolute;
+    z-index: 1000;
+    max-height: 200px;
+    border: 2px solid #222;
+    box-shadow: 0 10px 22px rgba(29, 71, 123, .08), 0 2px 12px rgba(29, 71, 123, .08);
+    border-radius: 8px;
+    padding: 5px 0;
+  }
+
+  .dropdown-item{
+    font-family: Graphik-Regular;
+    font-weight: normal;
+    display: flex;
+    color: #222;
+    line-height: 22px;
+    /* width: 158px; */
+    height: 32px;
+    align-items: center;
+    margin: 0 16px 0 16px;
+    width: 130px;
+  }
+
+  @media (max-width: 1200px) {
+    .property-card {
+        display: block;
+    }
+
+    .image-container {
+        position: relative;
+        /* max-width: 100%; */
+        width: 100%;
+        height: 350px;
+        aspect-ratio: 546 / 350;
+      }
+}

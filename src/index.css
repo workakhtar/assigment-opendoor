@@ -1,0 +1,105 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+strong,
+i,
+ol,
+ul,
+li,
+form,
+label,
+header,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  margin-right: 0;
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+
+}
+
+h1, h2, h3 {
+  font-family: Graphik-Bold;
+  font-weight: bold;
+}
+
+body {
+  min-height: 100%;
+  overflow-y: hidden;
+}
+
+
+.text-1{
+  font-size: 1rem;
+}
+
+.text-875{
+  font-size: .875rem
+}
+
+
+.ml-22{
+  margin-left: 22px;
+}
+
+
+.text-6e6e6e{
+  color: #6e6e6e;
+}
+
+.text-6e6e6e:hover {
+  color: #1c85e8;
+}
+
+.text-1c85e8{
+  color: #1c85e8;
+}
+
+
+.relative{
+  position: relative;
+}
+
+.absolute{
+  position: absolute;
+}
+
+
+
+.pointer{
+  cursor:pointer;
+}
+
+.bg-FFFFFF{
+  background-color: #FFFFFF;
+}
+
+
+@media (max-width: 768px) {
+  .tablet-ml-0{
+    margin-left: 0;
+  }
+
+}
