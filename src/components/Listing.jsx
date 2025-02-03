@@ -2,31 +2,55 @@ import React, { useState, useEffect } from "react";
 import "./../styles/components/listings.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListings } from "../Reduxtoolkit/slice/listing";
+import PropertyCard from "./PropertyCard";
+import FilterDropdown from "./Filters";
+
 
 
 const ITEMS_PER_PAGE = 10;
 
 const Listing = () => {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [showNewestDropdown, setShowNewestDropdown] = useState(false);
+  const [filterType, setFilterType] = useState("All");
 
   const dispatch = useDispatch();
   const { listings, loading, error } = useSelector((state) => state.listings);
 
   useEffect(() => {
-    if (listings) {
-      setTotalPages(Math.ceil(listings.length / ITEMS_PER_PAGE));
-    }
-  }, [listings]);
-
-  useEffect(() => {
     dispatch(fetchListings());
   }, [dispatch]);
+  
+
+  useEffect(() => {
+    if (listings) {
+      setTotalPages(Math.ceil(filteredListings.length / ITEMS_PER_PAGE));
+    }
+  }, [listings, filterType]);
+
+  // Filter the listings based on the selected filter
+  const filteredListings = listings
+  .filter((property) => {
+    if (filterType === "Active") {
+      return !property.zillowData?.dateSold;
+    } else if (filterType === "Sold") {
+      return property.zillowData?.dateSold;
+    }
+    return true;
+  })
+  .filter((property) => property.zillowData?.yearBuilt) // Remove properties with null yearBuilt
+  .sort((a, b) => {
+    if (filterType === "Newest") {
+      return b.zillowData.yearBuilt - a.zillowData.yearBuilt; 
+    } else if (filterType === "Oldest") {
+      return a.zillowData.yearBuilt - b.zillowData.yearBuilt; 
+    }
+    return 0; 
+  });
 
   // Paginate the listings
-  const paginatedListings = listings.slice(
+  const paginatedListings = filteredListings.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -37,6 +61,8 @@ const Listing = () => {
     Math.floor((currentPage - 1) / maxPageNumbers) * maxPageNumbers + 1;
   let endPage = Math.min(startPage + maxPageNumbers - 1, totalPages);
 
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <div>
       <div className="right-pane">
@@ -44,34 +70,17 @@ const Listing = () => {
           <div className="filters-title">
             <h1 className="text-1">Homes for sale in Tampa</h1>
             <div className="text-875 count">
-              {listings.length} listings found — Listed on the MLS.
+              {filteredListings.length} listings found — Listed on the MLS.
             </div>
           </div>
           <div className="filter-container d-flex ">
-            <div className="relative" onClick={() => setShowNewestDropdown(!showNewestDropdown)}>
-              <div className="filter-newest pointer d-flex">
-                <div className="newest">Newest</div>
-                <img src="/icons/newest-arrow.svg" alt="newest arrow" />
-              </div>
-            
-                {showNewestDropdown && (
-                    <div className="dropdown-menu-newest">
-                      <div className="dropdown-item-newest">Newest</div>
-                      <div className="dropdown-item-newest">Lowest Price</div>
-                      <div className="dropdown-item-newest">Highest Price</div>
-                      <div className="dropdown-item-newest">Smallest</div>
-                      <div className="dropdown-item-newest">Largeest </div>
-                    </div>
-                  )}
-          
-              
-            </div>
-            <div className="relaive">
-            <div className="more-filters pointer">
-              <img src="/icons/more-filters.svg" alt="" />
-              <div className="more">More Filters</div>
-            </div>
-            </div>
+          <FilterDropdown 
+              showNewestDropdown={showNewestDropdown} 
+              setShowNewestDropdown={setShowNewestDropdown} 
+              filterType={filterType} 
+              setFilterType={setFilterType} 
+            />
+
           </div>
         </div>
 
@@ -80,42 +89,13 @@ const Listing = () => {
             <p>Loading...</p>
           ) : (
             paginatedListings.map((property, index) => (
-              <div className="property-card" key={index}>
-                <div className="image-container">
-                  <div className="opendoor-badge">
-                    <img
-                      src="/logo/mobilelogo.svg"
-                      alt=""
-                      width={8}
-                      height={10}
-                    />
-                    Opendoor
-                  </div>
-                  <button class="favorite-button">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
-                  </button>
+            <div >
+               <PropertyCard property={property} key={index} />
+              {index ===1 && (
+                <div className="property-card p-10">
+                    <h1 className="text-1">Make your strongest offer when you buy with Opendoor</h1>
                 </div>
-                <div className="content">
-                  <h2 className="price">${property.userData.askingPrice}</h2>
-                  <p className="details">
-                    {property?.zillowData?.bedrooms}bd{" "}
-                    {property?.zillowData?.bathrooms}ba{" "}
-                    {property?.zillowData?.livingAreaValue}ft²
-                  </p>
-                  <p className="address">{property.address.formattedAddress}</p>
-                  <p className="location">
-                    {property.address.county}, {property.address.stateCode}
-                  </p>
-                </div>
+              )}
               </div>
             ))
           )}
